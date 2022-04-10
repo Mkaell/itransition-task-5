@@ -1,0 +1,165 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing:border-box;
+}
+
+body{
+  background-color: #DDC9B4;
+}
+
+.App {
+  text-align: center;
+}
+
+.navBar {
+  width: 100%;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #2A3D45;
+  color: white;
+}
+
+.navbtn {
+  float: left;
+  display: block;
+  text-align: center;
+  padding: 14px 16px !important;
+  text-decoration: none;
+  color: white !important;
+  transition: opacity linear 0.1s;
+  transition: background-color linear 0.1s;
+}
+.loginPage{
+  width: 30%;
+  margin: 100px auto;
+}
+
+.loginPage-title{
+  margin-bottom: 20px ;
+}
+
+.logoutbtn {
+  float: right;
+  display: block;
+  padding: 14px 16px !important;
+  color: white !important;
+  transition: opacity linear 0.1s;
+  transition: background-color linear 0.1s;
+}
+
+.navbtn:hover, .logoutbtn:hover {
+  opacity: 0.5;
+  background-color: #111 !important;
+}
+
+
+#loginFormField, #registerFormField, #writeMessageFormField {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid rgb(0, 0, 0);
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+
+.submitbtn {
+  background-color: #550C18;
+  color: white;
+  padding: 14px 20px;
+  border-radius: 5px;
+  margin: 20px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+.submitbtn:hover {
+  background-color: #111;
+}
+
+.messagesList-container, .usersList-container {
+  display: inline-block;
+
+}
+
+.usersList-container.h3 {
+  padding: 0;
+  margin: 0;
+}
+
+.messagesList-container {
+  float: left;
+  width: 40%;
+}
+
+.usersList-container {
+  width: 20%;
+  float: right;
+}
+
+.messagesList {
+  padding-top: 0px !important;
+}
+
+.messageItem {
+  margin-top: 3px;
+  padding: 5px 20px;
+  border: 2px solid black;
+  background-color: #F7DAD9;
+  border-radius: 5px;
+  transition: background-color linear 0.1s;
+}
+
+.messageItem:hover {
+  cursor: pointer;
+  background-color: #f5f1f1;
+}
+
+.messageDate {
+  display: block;
+  float: right !important;
+  text-align: right !important;
+}
+
+.messageTopic {
+  text-align: center !important;
+}
+
+.usersList {
+  padding-top: 0px !important;
+}
+
+.userItem {
+  margin-bottom: 3px;
+  border: 2px solid black;
+  background-color: #C17C74;
+  border-radius: 5px;
+  transition: background-color linear 0.1s;
+}
+
+.userItem:hover {
+  cursor: pointer;
+  background-color: #f5f1f1;
+}
+
+.messageContainer {
+  padding: 20px;
+  width: 50%;
+  margin: 100px auto 0;
+  background-color: white;
+  box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+}
+
+.msg-item {
+  text-align: left;
+  padding-bottom: 20px;
+}
+
+.writeMessage{
+  width: 50%;
+  margin: 100px auto;
+}
