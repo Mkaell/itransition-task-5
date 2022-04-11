@@ -1,23 +1,28 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 import {Button, Chip} from "@mui/material";
 import { IconButton } from "@mui/material";
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+import { AuthContext } from "../helpers/AuthContext";
 
-
-const LogOut = ( authState, setAuthState ) => {
+const LogOut = ( authState ) => {
+    
     let navigate = useNavigate();
+    const {  setAuthState } = useContext(AuthContext);
 
     const logOut = () => {
         localStorage.removeItem("accessToken");
-        navigate('/');
-        navigate(0);
+        navigate('/login');
+        setAuthState({
+            username: "",
+            id: 0,
+            status: false
+        })
     }
 
     return (
-        <div style={{float: "right"}}>
+        <div>
             <IconButton label={authState.authState.username} style={{color: "white", float: "center"}}>
-                <Chip label={authState.authState.username} style={{color: "white", backgroundColor: "#000"}}/>
+                <Chip label={authState.authState.username} style={{color: "white", backgroundColor: "#000", borderRadius: '10px'}}/>
             </IconButton>
             <Button variant="text" className="navbtn logoutbtn" onClick={logOut}>Log Out</Button>
         </div>

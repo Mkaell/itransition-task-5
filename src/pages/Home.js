@@ -6,6 +6,7 @@ import io from 'socket.io-client';
 import { AuthContext } from "../helpers/AuthContext";
 import { List, ListItem, ListItemText } from '@mui/material'
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
+
 let socket;
 
 const Home = () => {
@@ -14,6 +15,7 @@ const Home = () => {
     const id = authState.id;
     const [listOfMessages, setListOfMessages] = useState([]);
     const [listOfUsers, setListOfUsers] = useState([]);
+    
     let navigate = useNavigate();
 
     useEffect(() => {
@@ -56,9 +58,9 @@ const Home = () => {
 
 
     return(
-        <div style={{display: 'flex', width: '80%', margin: '100px auto 0', justifyContent: 'space-around'}}>
+        <div style={{display: 'flex', width: '80%', margin: '50px auto 0', justifyContent: 'space-around'}}>
             <div className="usersList-container">
-                <h3>Users</h3>
+                <h3 className='usersList-title'>Users</h3>
                 <List style={{padding: '10px', textAlign: 'center', width: '100%', borderRadius: '10px',  height: '50%'}}>
                     {
                         listOfUsers.map((user, key) => {
@@ -75,25 +77,28 @@ const Home = () => {
                 </List>
             </div>
             <div className="messagesList-container">
-                {(listOfMessages.length === 0) ? (
-                    <h3>No messages for you</h3>
-                ) : (
-                    <>
-                        <h3>Your messages:</h3>
-                        <List className="messagesList">
-                            {listOfMessages.map((message, key) => {
-                                return(
-                                    <ListItem className="messageItem" key={key}
-                                              disableGutters
-                                              onClick={() => {navigate(`/message/${message.id}`)}}>
-                                        <ListItemText primary={message.fromUsername} />
-                                        <ListItemText className="messageTopic" primary={message.topic} />
-                                        <ListItemText secondary={new Date(message.createdAt).toLocaleString()} className="messageDate" />
-                                    </ListItem>
-                                )
-                            })}
-                        </List>
-                    </>
+                {
+                    (listOfMessages.length === 0) ? (
+                        <h3 className='messagesList-title'>No messages for you</h3>
+                    ) : (
+                        <>
+                            <h3 className='messagesList-title'>Messages:</h3>
+                            <List className="messagesList">
+                                {
+                                    listOfMessages.map((message, key) => {
+                                        return(
+                                            <ListItem className="messageItem" key={key}
+                                                        disableGutters
+                                                        onClick={() => {navigate(`/message/${message.id}`)}}>
+                                                <ListItemText primary={message.fromUsername} />
+                                                <ListItemText className="messageTopic" primary={message.topic} />
+                                                <ListItemText secondary={new Date(message.createdAt).toLocaleString()} className="messageDate" />
+                                            </ListItem>
+                                        )
+                                    })
+                                }
+                            </List>
+                        </>
                 )}
             </div>
         </div>

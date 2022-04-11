@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@mui/material";
 
 
-const NavigationMenu = ( authState ) => {
+const Navigation = ( authState ) => {
+    
     let navigate = useNavigate();
 
     const gohomePage = () => {
@@ -41,4 +42,4 @@ const NavigationMenu = ( authState ) => {
     );
 };
 
-export default NavigationMenu;
+export default Navigation;

@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+    
     let navigate = useNavigate();
 
     const initialValues = {
@@ -24,7 +25,7 @@ const Login = () => {
             } else {
                 localStorage.setItem("accessToken", response.data);
                 navigate("/");
-                navigate(0);
+               
             }
         });
     };
@@ -46,7 +47,7 @@ const Login = () => {
                     <Field
                         autoComplete="off"
                         type="password"
-                        id="loginFormField"
+                        id="loginFormPasswordField"
                         name="password"
                         placeholder="Password"/>
                         <ErrorMessage name="password" component="span" style={{color: '#d43232'}}/>

@@ -2,13 +2,13 @@ import './App.css';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Home from "./pages/Home";
 import Login from "./pages/Login";
-import Registration from "./pages/Registration";
-import WriteMessage from "./pages/WriteMessage";
-import WriteMessageForUser from "./pages/WriteMessageForUser";
+import SignUp from "./pages/SignUp";
+import SendMessage from "./pages/SendMessage";
+import SendMessageUser from "./pages/SendMessageUser";
 import Message from "./pages/Message";
-import PageNotFound from "./pages/PageNotFound";
+import ErrorPage from "./pages/ErrorPage";
 import LogOut from "./components/LogOut";
-import NavigationMenu from "./components/NavigationMenu";
+import Navigation from "./components/Navigation";
 import { useState, useEffect } from 'react';
 import { AuthContext } from "./helpers/AuthContext";
 import axios from 'axios';
@@ -23,10 +23,13 @@ function App() {
 
     useEffect(() => {
         axios.get("https://itransition-task5.herokuapp.com/users/auth", {
+            
             headers: {
                 accessToken: localStorage.getItem("accessToken"),
             }
+
         }).then((response) => {
+
             if (response.data.error) {
                 localStorage.removeItem("accessToken");
                 setAuthState({...authState, status: false});
@@ -37,6 +40,7 @@ function App() {
                     status: true,
                 });
             }
+
         });
 
     }, []);
@@ -46,21 +50,21 @@ function App() {
         <AuthContext.Provider value={{authState, setAuthState}}>
             <Router>
                 <div className="navBar">
-                    <NavigationMenu authState={authState} style={{backgroundColor: '#2A3D45'}}/>
+                    <Navigation authState={authState}/>
                     {!authState.status ? (
                         <></>
                     ) : (
-                        <LogOut authState={authState} setAuthState={setAuthState} />
+                        <LogOut authState={authState}/>
                     )}
                 </div>
                 <Routes>
                     <Route path="/" element={<Home />}/>
                     <Route path="/message/:id" element={<Message />} />
                     <Route path="/login" element={<Login />} />
-                    <Route path="/register" element={<Registration />} />
-                    <Route path="/write-message" element={<WriteMessage />} />
-                    <Route path="/write-one-user-message/:userId" element={<WriteMessageForUser />} />
-                    <Route path="*" element={<PageNotFound />} />
+                    <Route path="/register" element={<SignUp />} />
+                    <Route path="/write-message" element={<SendMessage />} />
+                    <Route path="/write-one-user-message/:userId" element={<SendMessageUser />} />
+                    <Route path="*" element={<ErrorPage />} />
                 </Routes>
             </Router>
         </AuthContext.Provider>

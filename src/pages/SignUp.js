@@ -4,7 +4,8 @@ import * as Yup from 'yup';
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 
-const Registration = () => {
+const SignUp = () => {
+
     let history = useNavigate();
 
     const initialValues = {
@@ -12,6 +13,12 @@ const Registration = () => {
         username:"",
         password:"",
     };
+
+    const validationSchema = Yup.object().shape({
+        email: Yup.string().email("Wrong input").required("E-Mail is required."),
+        username: Yup.string().required("Username is required."),
+        password: Yup.string().required("Password is required."),
+    });
 
     const onSubmit = (data) => {
         axios.post("https://itransition-task5.herokuapp.com/users/register", data).then((response) => {
@@ -22,14 +29,6 @@ const Registration = () => {
             }
         })
     };
-
-    const validationSchema = Yup.object().shape({
-        email: Yup.string().email("Wrong input").required("E-Mail is required."),
-        username: Yup.string().required("Username is required."),
-        password: Yup.string().required("Password is required."),
-    });
-
-
 
     return (
         <div className="loginPage">
@@ -42,20 +41,20 @@ const Registration = () => {
                     <ErrorMessage name="email" component="span"/>
                     <Field
                         autoComplete="off"
-                        id="registerFormField"
+                        id="registerFormEmailField"
                         name="email"
                         placeholder="Enter your e-mail" />
                     <ErrorMessage name="username" component="span"/>
                     <Field
                         autoComplete="off"
-                        id="registerFormField"
+                        id="registerFormUserNameField"
                         name="username"
                         placeholder="Enter username" />
                     <ErrorMessage name="password" component="span"/>
                     <Field
                         autoComplete="off"
                         type="password"
-                        id="registerFormField"
+                        id="registerFormPasswordField"
                         name="password"
                         placeholder="Password"/>
                     <button type="submit" className="submitbtn">Register</button>
@@ -65,4 +64,4 @@ const Registration = () => {
     );
 };
 
-export default Registration;
+export default SignUp;

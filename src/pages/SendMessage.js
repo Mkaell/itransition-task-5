@@ -7,15 +7,25 @@ import { AuthContext } from "../helpers/AuthContext";
 import axios from 'axios';
 import io from 'socket.io-client';
 
-
 let socket;
 
-
-const WriteMessage = () => {
+const SendMessage = () => {
     
     const { authState } = useContext(AuthContext);
 
     let navigate = useNavigate();
+
+    const initialValues = {
+        topic: "",
+        username: "",
+        text: "",
+    }
+
+    const validationSchema = Yup.object().shape({
+        topic: Yup.string().required(),
+        username: Yup.string().required(),
+        text: Yup.string().required()
+    })
 
     useEffect(() => {
         socket = io("https://itransition-task5.herokuapp.com/")
@@ -33,29 +43,21 @@ const WriteMessage = () => {
             }
         })
     }, []);
-    const initialValues = {
-        topic: "",
-        username: "",
-        text: "",
-    }
-
-    const validationSchema = Yup.object().shape({
-        topic: Yup.string().required(),
-        username: Yup.string().required(),
-        text: Yup.string().required()
-    })
 
     const onSubmit = (data) => {
   
         data.fromUserId = authState.id;
         data.fromUsername = authState.username;
+
         let userForApi = {
             username: ""
-        };
+        };       
         const usernames = data.username.split(",")
+
         usernames.forEach(async (value) => {
             const dataForApi = Object.assign({},data);
             userForApi.username = value.trim();
+
             await axios.post("https://itransition-task5.herokuapp.com/users/userByUsername", userForApi)
                 .then(async (response) => {
                 if (!response.data.error) {
@@ -110,4 +112,4 @@ const WriteMessage = () => {
     );
 };
 
-export default WriteMessage;
+export default SendMessage;
