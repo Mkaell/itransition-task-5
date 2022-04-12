@@ -2,10 +2,10 @@ import React, { useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 import {Button, Chip} from "@mui/material";
 import { IconButton } from "@mui/material";
-import { AuthContext } from "../helpers/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 
 const LogOut = ( authState ) => {
-    
+
     let navigate = useNavigate();
     const {  setAuthState } = useContext(AuthContext);
 

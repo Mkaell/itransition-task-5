@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import io from 'socket.io-client';
-import { AuthContext } from "../helpers/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 import { List, ListItem, ListItemText } from '@mui/material'
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 
@@ -15,7 +15,7 @@ const Home = () => {
     const id = authState.id;
     const [listOfMessages, setListOfMessages] = useState([]);
     const [listOfUsers, setListOfUsers] = useState([]);
-    
+
     let navigate = useNavigate();
 
     useEffect(() => {
@@ -57,6 +57,7 @@ const Home = () => {
     }, [setAuthState, id, navigate]);
 
 
+
     return(
         <div style={{display: 'flex', width: '80%', margin: '50px auto 0', justifyContent: 'space-around'}}>
             <div className="usersList-container">
@@ -87,7 +88,7 @@ const Home = () => {
                                 {
                                     listOfMessages.map((message, key) => {
                                         return(
-                                            <ListItem className="messageItem" key={key}
+                                            <ListItem className="messageItem"  key={key}
                                                         disableGutters
                                                         onClick={() => {navigate(`/message/${message.id}`)}}>
                                                 <ListItemText primary={message.fromUsername} />

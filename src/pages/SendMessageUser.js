@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import * as Yup from 'yup';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { AuthContext } from "../helpers/AuthContext";
+import { AuthContext } from "../context/AuthContext";
 import axios from 'axios';
 import io from 'socket.io-client';
 

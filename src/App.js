@@ -10,7 +10,7 @@ import ErrorPage from "./pages/ErrorPage";
 import LogOut from "./components/LogOut";
 import Navigation from "./components/Navigation";
 import { useState, useEffect } from 'react';
-import { AuthContext } from "./helpers/AuthContext";
+import { AuthContext } from "./context/AuthContext";
 import axios from 'axios';
 
 function App() {
@@ -22,12 +22,12 @@ function App() {
     });
 
     useEffect(() => {
+
         axios.get("https://itransition-task5.herokuapp.com/users/auth", {
             
             headers: {
                 accessToken: localStorage.getItem("accessToken"),
             }
-
         }).then((response) => {
 
             if (response.data.error) {
@@ -40,7 +40,6 @@ function App() {
                     status: true,
                 });
             }
-
         });
 
     }, []);
